@@ -36,30 +36,23 @@ class sheet_opr(Drive_Setup):
 
     def sheet_move(self,sheet_id):
         __driveobj__=sheet_opr('drive')
-        file_id=[i['id'] for i in  __driveobj__.service.files().list().execute().get('files',[]) if(i['name']=="Quizz_Application" )] # geting file id for moving
+        dir_id=[i['id'] for i in  __driveobj__.service.files().list().execute().get('files',[]) if(i['name']=="Quizz_Application" )] # geting file id for moving
+        
         
         # moving excel file in Directory
+        # Only change file id and folder id cann't change anything 
+        file_id = sheet_id
+        folder_id = dir_id[0]
+        # Retrieve the existing parents to remove
+        file = __driveobj__.service.files().get(fileId=file_id,
+                                 fields='parents').execute();
+        previous_parents = ",".join(file.get('parents'))
+        # Move the file to the new folder
+        file = __driveobj__.service.files().update(fileId=file_id,
+                                    addParents=folder_id,
+                                    removeParents=previous_parents,
+                                    fields='id, parents').execute()
 
-
-        source_folder_id=''
-        target_folder_id=''
-        query=f"parents = '{source_folder_id}' "
-        response=service.files().list(q=query).execute()
-        file=response.get('files')
-        nextPageToken=response.get('nextPageToken')
-        
-        while nextPageToken:
-            respose=service.file().list(q=query,pageToken=nextPageToken).execute()
-            files.extend(response.get('files'))
-            nextPageToken=response.get('nextPageToken')
-            
-        for f in files:
-            if f['mineType'] != 'application/vnd.google-apps.folder':
-                service.files().update(
-                        fileId=f.get('id'),
-                        addParents=target_folder_id,
-                        removeParents=source_folder_is
-                        ).execute()
 
 
         # moving Excel end
@@ -69,6 +62,6 @@ class sheet_opr(Drive_Setup):
 
 
 obj1=sheet_opr('sheet')
-#id=obj1.create_sheet("DemoSheet")
+id=obj1.create_sheet("DemoSheet")
 obj1.sheet_move(id)
 
