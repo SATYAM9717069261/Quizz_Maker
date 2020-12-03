@@ -42,7 +42,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="Top_Frame">
      <property name="maximumSize">
       <size>
        <width>16777215</width>
@@ -121,7 +121,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="Mid_Frame">
      <property name="styleSheet">
       <string notr="true"/>
      </property>
@@ -145,7 +145,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="frame_4">
+       <widget class="QFrame" name="Top_Label">
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -164,7 +164,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="Add_Quizz">
            <property name="maximumSize">
             <size>
              <width>150</width>
@@ -177,7 +177,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="Add_Fill">
            <property name="maximumSize">
             <size>
              <width>150</width>
@@ -193,11 +193,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QScrollArea" name="scrollArea">
+       <widget class="QScrollArea" name="Scroll_Area">
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_2">
+        <widget class="QWidget" name="Scroll_Area_Content">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -208,7 +208,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QFrame" name="frame_5">
+           <widget class="QFrame" name="Quizz">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
@@ -429,7 +429,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="frame_6">
+           <widget class="QFrame" name="Fillup">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
@@ -544,7 +544,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_3">
+    <widget class="QFrame" name="Bottom_Frame">
      <property name="minimumSize">
       <size>
        <width>0</width>
