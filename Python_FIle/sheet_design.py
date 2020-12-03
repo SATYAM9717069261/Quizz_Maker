@@ -1,11 +1,13 @@
 import sys
+from PySide2 import QtCore
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication,QFileDialog,QStackedWidget
-from PySide2.QtCore import QFile, QIODevice,QCoreApplication
+from PySide2.QtWidgets import QApplication,QVBoxLayout
+from PySide2.QtCore import QFile, QCoreApplication, QIODevice
+
 
 class Setup_urls:
-    def __init__(self):
-        self.ui_file_name = "../UI/sheet_design.ui"
+    def __init__(self,url):
+        self.ui_file_name = url
         self.ui_file = QFile(self.ui_file_name)
 
         if not self.ui_file.open(QIODevice.ReadOnly):                                                         # Error Occure if file not open
@@ -15,32 +17,34 @@ class Setup_urls:
         self.window=QUiLoader().load(self.ui_file)
         self.ui_file.close()
 
-# customisation if any changes in Design level like lable text then use self.window
+    def Button_clicks(self):   # all Button click define here And call Further function
+        self.vbox=QVBoxLayout()
+        self.window.Add_Quizz.clicked.connect(self.Quizz_UI_ADD)
+        self.window.Add_Fill.clicked.connect(self.Fillup_UI_ADD)
 
-    def Button_clicks(self):                                                                         # all Button click define here And call Further function
-        self.window.Browse_JSON.clicked.connect(self.browseJson)
-        self.window.Browse_Student_List.clicked.connect(self.browseStudent_list)
-        self.window.OK_btn.clicked.connect(self.save_data)
-        self.window.Cancel_btn.clicked.connect(QCoreApplication.instance().quit)  # cancel button define 
 
-    def browseJson(self):
-        __fname__=QFileDialog.getOpenFileName(QFileDialog(),"Google Json File","../","JSONFile(*.json)")
-        self.window.Json_file_path.setText(__fname__[0])
-    def browseStudent_list(self):
-        __fname__=QFileDialog.getOpenFileName(QFileDialog(),"Student List","../","EXCEL(*.xlsx *.xlsm *.xls *.xlt *.xml *.xlam *.xla *.xlw *.xlr)")
-        self.window.Student_List_Url.setText(__fname__[0])
-    def save_data(self):
-        # check git repo and Google Sheet(use Json)
-        # create two file/class for Google Sheet and git and call it from here
-        pass
+    def Fillup_UI_ADD(self):
+        Fillup=Setup_urls("../UI/Fillup.ui")
+        self.vbox.addWidget(Fillup.window.Fillup)           # never set layout in Source page it generate ISSUES
+        self.window.Scroll_Area.setWidget(self.window.Scroll_Area_Content.setLayout(self.vbox))
 
+    def Quizz_UI_ADD(self):
+        Quizz=Setup_urls("../UI/Quizz.ui")
+        self.vbox.addWidget(Quizz.window.final_quiz)           # never set layout of Source page it generate ISSUES
+        self.window.Scroll_Area.setWidget(self.window.Scroll_Area_Content.setLayout(self.vbox))
+        #Quizz.window.add_option.clicked.connect(Quizz.Add_option ) 
+        #print(dir(Quizz.window.add_option))
+
+    def Add_option(self):
+        print("Call")
 
 
 
 if __name__ == "__main__":
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
     app = QApplication(sys.argv)
-    Object1 = Setup_urls()
-    #Object1.Button_clicks()   # all Click event define here
+    Object1 = Setup_urls("../UI/sheet_design.ui")
+    Object1.Button_clicks()   # all Click event define here
     Object1.window.show()
     sys.exit(app.exec_())
 
