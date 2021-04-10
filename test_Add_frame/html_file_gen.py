@@ -1,16 +1,18 @@
 class BaseOperation:
     def __init__(self):
          self.__switcher={
-                  'Html':['<html>','</html>'],
+                  'html':['<html>','</html>'],
                   'style':['<style>','</style>'],
+                  'title':['<title>','</title>'],
+                  'metatag':['<meta>','</meta>'],
                   'body':['<body>','</body>'],
                   'div':['<div>','</div>'],
-                  'Project':['<table>','</table>'],
-                  'Question':['<tr><th> Question : </th> <td>','</td></tr>'],
-                  'Options':['<tr>','</tr>'],
-                  'Option':['<td>','</td>'],
-                  'Answer':['<tr><th> Answer : </th> <td>','</td></tr>'],
-                  'Script':['<script>','</script>']
+                  'project':['<table>','</table>'],
+                  'question':['<tr><th> Question : </th> <td>','</td></tr>'],
+                  'options':['<tr>','</tr>'],
+                  'option':['<td>','</td>'],
+                  'answer':['<tr><th> Answer : </th> <td>','</td></tr>'],
+                  'script':['<script>','</script>']
                 }
     def create_html_element(self,data):
         opentag,closetag=self.__switcher.get(data,["",""])
@@ -31,6 +33,9 @@ class BaseOperation:
         print(self.__switcher[tag_name])
     
     def template(self,html_filename,script_filename,stylesheet_filename):
+        self.__htmlfile=html_filename;
+        self.__htmlfile=open(html_filename,'w');
+        
         
 
 
